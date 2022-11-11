@@ -1,0 +1,8 @@
+# wav-to-duration --read-entire-file=false scp:../data/musan_noise/wav10split/5/wav.scp ark,t:../data/musan_noise/wav10split/5/reco2dur 
+# Started at Fri Nov 11 14:41:30 SGT 2022
+#
+wav-to-duration --read-entire-file=false scp:../data/musan_noise/wav10split/5/wav.scp ark,t:../data/musan_noise/wav10split/5/reco2dur 
+LOG (wav-to-duration[5.5.971~1-07043]:main():wav-to-duration.cc:92) Printed duration for 93 audio files.
+LOG (wav-to-duration[5.5.971~1-07043]:main():wav-to-duration.cc:94) Mean duration was 30.4351, min and max durations were 0.103562, 306.416
+# Accounting: time=2 threads=1
+# Ended (code 0) at Fri Nov 11 14:41:32 SGT 2022, elapsed time 2 seconds
