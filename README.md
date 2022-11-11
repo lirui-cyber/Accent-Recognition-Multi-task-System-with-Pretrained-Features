@@ -72,6 +72,8 @@ python deal_musan.py  /home3/jicheng/source-data/musan/noise data/musan_noise
 ```sh
 cd Add-Noise
 bash add-noise.sh --steps 2 --src-train ../data/test --noise_dir ../data/musan_noise
+cd ..
+bash generate_wav.sh
 ```
 
 ## Accent recognition system
