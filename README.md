@@ -88,19 +88,18 @@ eg:
   move `espnet/utils/*` to ` your espnet localtion/espnet/utils/` 
 ```
   2. step by step
-    The overall code is divided into four parts, including feature extraction, JSON file generation, model training and decoding. <br>
-    You can control the steps by changing the value of the step variable.<br>
-  3. Download pretrained model
+    The overall code is divided into four parts, including feature extraction, JSON file generation, model training and decoding. You can control the steps by changing the value of the step variable.<br>
+  3. Download pretrained model<br>
     First you need to download the pretrained model to the pretrained-model folder, the download link is as follows:<br>
-    - wavlm 
-        https://drive.google.com/file/d/12-cB34qCTvByWT-QtOcZaqwwO21FLSqU/view?usp=share_link
+    - wavlm <br>
+        https://drive.google.com/file/d/12-cB34qCTvByWT-QtOcZaqwwO21FLSqU/view?usp=share_link <r>
     - xlsr53
         https://dl.fbaipublicfiles.com/fairseq/wav2vec/xlsr_53_56k.pt
 ```
 egs: 
   ### for 16k data
   #The pre-trained features are extracted in the first step, you can use model_type to decide to use wavlm or wav2vec2
-  bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 1 --model_type=wavlm
+  bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 1 --model_type wavlm
   bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 2
   bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 3
   bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 4
@@ -109,8 +108,7 @@ egs:
   ```
 
 
-  4. In addition, in order to better reproduce and avoid you training asr system again, I uploaded an ASR model trained use 16k accent160 data.<br>
-     For pretrained model, you can download from this link: https://drive.google.com/file/d/1mP81esvRycnzqpvxpm7HjNPHT8SFfdig/view?usp=sharing <br>
+  4. For pretrained model, you can download from this link: https://drive.google.com/file/d/1mP81esvRycnzqpvxpm7HjNPHT8SFfdig/view?usp=sharing <br>
      You can run the following command to directly reproduce our results.
 ```
   # 16k data
