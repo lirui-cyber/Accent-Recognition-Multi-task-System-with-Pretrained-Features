@@ -148,19 +148,12 @@ if [ ! -z $step04 ]; then
 fi
 
 epochs=120
-pretrained_model=pretrained-model/16k/model.val5.avg.best
 if [ ! -z $step05 ]; then
     epoch_stage=0
-    accentWeight=0.3
-    asrWeight=1
-    intermediate_ctc_weight=0
-    intermediate_ctc_layer="12"
-    transformer_lr=5
-    batch_size=32
-    expname=${train_set}_transformer_12_enc_6_dec_asrWeight_${asrWeight}_accentWeight_${accentWeight}_intermediate_ctc_layer_${intermediate_ctc_layer}_withSpecAug_lr_${transformer_lr}_batch_size_${batch_size}_${backend} 
+    expname=${train_set}_transformer_12_enc_6_dec_withoutpretrain_asrWeight_${asrWeight}_accentWeight_${accentWeight}_intermediate_ctc_layer_${intermediate_ctc_layer}_withSpecAug_lr_${transformer_lr}_batch_size_${batch_size}_${backend} 
     expdir=$exp/${expname}
     mkdir -p ${expdir}
-    echo "stage 05: Network Training"
+    echo "stage 06: Network Training without asr pretraining "
     ngpu=1
     if  [ ${epoch_stage} -gt 0 ]; then
         echo "stage 05: Resume network from epoch ${epoch_stage}"
@@ -187,18 +180,14 @@ if [ ! -z $step05 ]; then
         --NumClass 8 \
         --asrWeight ${asrWeight} \
         --accentWeight ${accentWeight} \
-        --batch-size ${batch_size} \
         --transformer-lr ${transformer_lr} \
         --utt2LabelTrain $data/${train_set}/utt2IntLabel \
         --utt2LabelValid $data/${valid_set}/utt2IntLabel \
         --intermediate-ctc-weight ${intermediate_ctc_weight} \
         --intermediate-ctc-layer ${intermediate_ctc_layer} \
         --train-json $data/${train_set}/${train_set}_${bpemode}_${vocab_size}.json \
-        --valid-json $data/${valid_set}/${train_set}_${bpemode}_${vocab_size}.json \
-        --enc-init ${pretrained_model} \
-        --enc-init-mods='encoder.' \
-        --dec-init ${pretrained_model} \
-        --dec-init-mods='decoder.decoders'
+        --valid-json $data/${valid_set}/${train_set}_${bpemode}_${vocab_size}.json 
+
 fi
 
 
