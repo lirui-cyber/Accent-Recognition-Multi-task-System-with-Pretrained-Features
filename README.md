@@ -89,11 +89,14 @@ eg:
 ```
   2. step by step
     The overall code is divided into four parts, including feature extraction, JSON file generation, model training and decoding. <br>
-    You can control the steps by changing the value of the step variable. 
+    You can control the steps by changing the value of the step variable.<br>
+ 
 ```
 egs: 
   ### for 16k data
-  bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 1
+  #The pre-trained features are extracted in the first step, you can use model_type to decide to use wavlm or wav2vec2
+  bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 1 --model_type=wavlm
+  bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 2
   bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 3
   bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 4
   bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 5
