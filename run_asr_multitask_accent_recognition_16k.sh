@@ -31,13 +31,9 @@ bpemode=bpe
 do_delta=false
 
 train_multitask_config=conf/e2e_asr_transformer_multitask_accent.yaml
-lm_config=conf/espnet_lm.yaml
 decode_config=conf/espnet_decode.yaml
 preprocess_config=conf/espnet_specaug.yaml
 
-# rnnlm related
-lm_resume=         # specify a snapshot file to resume LM training
-lmtag=0             # tag for managing LMs
 
 # decoding parameter
 recog_model=model.acc.best # set a model to be used for decoding: 'model.acc.best' or 'model.loss.best'
@@ -58,7 +54,7 @@ model_type=wavlm
 feat_layer=16 # which layer to extract
 
 # exp tag
-tag="base" # tag for managing experiments.
+tag=$model_type  # tag for managing experiments.
 
 # Set bash to 'debug' mode, it will exit on :
 # -e 'error', -u 'undefined variable', -o ... 'error in pipeline', -x 'print commands',
@@ -147,11 +143,12 @@ if [ ! -z $step04 ]; then
     echo "stage 04: Make Json Labels Done"
 fi
 
+expname=${train_set}_transformer_12_enc_6_dec_asrWeight_${asrWeight}_accentWeight_${accentWeight}__withSpecAug_lr_${transformer_lr}_batch_size_${batch_size}_${backend} 
+expdir=$exp/${expname}
+
 epochs=120
 if [ ! -z $step05 ]; then
     epoch_stage=0
-    expname=${train_set}_transformer_12_enc_6_dec_withoutpretrain_asrWeight_${asrWeight}_accentWeight_${accentWeight}_intermediate_ctc_layer_${intermediate_ctc_layer}_withSpecAug_lr_${transformer_lr}_batch_size_${batch_size}_${backend} 
-    expdir=$exp/${expname}
     mkdir -p ${expdir}
     echo "stage 06: Network Training without asr pretraining "
     ngpu=1
@@ -190,11 +187,8 @@ if [ ! -z $step05 ]; then
 
 fi
 
-
 if [ ! -z $step06 ]; then
     train_multitask_config=conf/e2e_asr_transformer_multitask_accent.yaml
-    for expname in train_transformer_12_enc_6_dec_asrWeight_1_accentWeight_0.1_intermediate_ctc_layer_12_withSpecAug_lr_5_batch_size_32_pytorch;do
-    expdir=$exp/${expname}
     for test in $recog_set;do
     nj=30
     if [[ $(get_yaml.py ${train_multitask_config} model-module) = *transformer* ]]; then
@@ -243,8 +237,6 @@ if [ ! -z $step06 ]; then
     fi
     echo "Decoding finished"
   done
-  done
-  done
 fi
 
 
@@ -280,7 +272,6 @@ if [ ! -z $step07 ]; then
     concatjson.py ${expdir}/${decode_dir}/data.*.json >  ${expdir}/${decode_dir}/${train_set}_${bpemode}_${vocab_size}.json
     python scripts/parse_track1_jsons.py  ${expdir}/${decode_dir}/${train_set}_${bpemode}_${vocab_size}.json ${expdir}/${decode_dir}/result.txt
     python scripts/parse_track1_jsons.py  ${expdir}/${decode_dir}/${train_set}_${bpemode}_${vocab_size}.json ${expdir}/${decode_dir}/result.txt > ${expdir}/${decode_dir}/result_acc.txt
-    fi
     echo "Decoding finished"
   done
 fi
