@@ -1,4 +1,4 @@
-# Accent Recognition Multi-task System with ASRInit
+# Accent Recognition Multi-task System with Pretrained Features
 
 # Data preparation scripts and training pipeline for the Accented English Recognition.
 
