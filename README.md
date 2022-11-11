@@ -1,7 +1,4 @@
 # Accent Recognition Multi-task System with Pretrained Features
-
-# Data preparation scripts and training pipeline for the Accented English Recognition.
-
 # Environment dependent
   1. Kaldi (Data preparation related function script) [Github link](https://github.com/kaldi-asr/kaldi)
   2. Espnet-0.10.4
@@ -87,7 +84,6 @@ eg:
   move `espnet/bin/*` to ` your espnet localtion/espnet/bin/` 
   move `espnet/nets/pytorch_backend/*` to ` your espnet localtion/espnet/nets/pytorch_backend/` 
   move `espnet/utils/*` to ` your espnet localtion/espnet/utils/` 
-
 ```
   2. step by step
     The overall code is divided into four parts, including feature extraction, JSON file generation, model training and decoding. <br>
