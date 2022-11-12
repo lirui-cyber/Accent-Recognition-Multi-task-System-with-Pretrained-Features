@@ -21,29 +21,13 @@ ln -s {kaldi_root}      # Create link to Kaldi. e.g. ln -s home/theanhtran/kaldi
 make TH_VERSION=1.8.0 CUDA_VERSION=10.2     # Install Pytorch and CUDA
 . ./activate_python.sh; python3 check_install.py  # Check the installation
 conda install torchvision==0.9.0 torchaudio==0.8.0 -c pytorch
+bash installers/install_fairseq.sh
+bash installers/install_s3prl.sh
 ```
 ### Set your own execution environment
 Open path.sh file, change $MAIN_ROOT$ to your espnet directory, 
 ```
 e.g. MAIN_ROOT=/home/jicheng/espnet
-```
-### Set up the environment for extracting pre-trained features
-- install librosa, kaldiio
-```
-pip install librosa
-pip install kaldiio 
-```
-- install fairseq
-```
-git clone -b v0.12.2 https://github.com/facebookresearch/fairseq.git  tool/fairseq
-pip install -e tool/fairseq
-```
-- install s3prl
-```
-git clone -b v0.3.4 https://github.com/s3prl/s3prl.git tool/s3prl
-sed -i '60d' tool/s3prl/setup.py
-pip install -e tool/s3prl/
-mv tool/expert.py tool/s3prl/s3prl/upstream/wav2vec2/
 ```
 
 # Instructions for use
@@ -106,8 +90,6 @@ egs:
   bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 5
   bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 6
   ```
-
-
   4. For pretrained model, you can download from this link: https://drive.google.com/file/d/1mP81esvRycnzqpvxpm7HjNPHT8SFfdig/view?usp=sharing <br>
      You can run the following command to directly reproduce our results.
 ```
