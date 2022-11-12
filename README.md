@@ -1,9 +1,5 @@
 # Accent Recognition Multi-task System with Pretrained Features
-# Environment dependent
-  1. Kaldi (Data preparation related function script) [Github link](https://github.com/kaldi-asr/kaldi)
-  2. Espnet-0.10.4
-  4. Modify the installation address of espnet in the path.sh file
-## Installation
+## Environment
 ### Set up kaldi environment
 ```
 git clone -b 5.4 https://github.com/kaldi-asr/kaldi.git kaldi
@@ -28,8 +24,6 @@ Open path.sh file, change $MAIN_ROOT$ to your espnet directory,
 ```
 e.g. MAIN_ROOT=/home/jicheng/espnet
 ```
-
-# Instructions for use
 ## Data preparation
   1. All the data used in the experiment are stored in the `data` directory, in which train is used for training, valid is the verification set, 
     cv_all and test are used for testing respectively.
@@ -43,10 +37,10 @@ sed -i "s#/home/zhb502/raw_data/2020AESRC/#/home/jicheng/ASR-data/#g" data/train
 ```
 3. Other files can remain unchanged, you can use it directly (eg, utt2IntLabel, text, utt2spk...).
 
-## Add noise to the test set 
+### Add noise to the test set 
 To test the performance in the noise background, we added musan noise to the test set.
 At the same time, different SNR(5,10,15,20) are used for noise addition. <br>
-### Generate format file
+#### Generate format file
 ```python
 # The first parameter is the path to the musan noise audio
 python deal_musan.py  /home3/jicheng/source-data/musan/noise data/musan_noise
