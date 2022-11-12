@@ -11,16 +11,15 @@ cd kaldi/tools/; make; cd ../src; ./configure; make
 ```
 ### Set up espnet environment
 ```
-git clone -b v.0.10.4 https://github.com/espnet/espnet.git
+git clone https://github.com/espnet/espnet.git
 cd espnet/tools/        # change to tools folder
 ln -s {kaldi_root}      # Create link to Kaldi. e.g. ln -s home/theanhtran/kaldi/
 ```
 ### Set up Conda environment
 ```
-./setup_anaconda.sh anaconda espnet 3.7.9   # Create a anaconda environmetn - espnet with Python 3.7.9
-make TH_VERSION=1.8.0 CUDA_VERSION=10.2     # Install Pytorch and CUDA
+./setup_anaconda.sh anaconda espnet 3.8   # Create a anaconda environmetn - espnet with Python 3.7.9
+make TH_VERSION=1.10.1 CUDA_VERSION=11.3     # Install Pytorch and CUDA
 . ./activate_python.sh; python3 check_install.py  # Check the installation
-conda install torchvision==0.9.0 torchaudio==0.8.0 -c pytorch
 bash installers/install_fairseq.sh
 bash installers/install_s3prl.sh
 ```
@@ -68,16 +67,17 @@ bash generate_wav.sh
 eg: 
   move `espnet/asr/pytorch_backend/asr_train_multitask_accent.py` to ` your espnet localtion/espnet/asr/pytorch_backend/` 
   move `espnet/bin/*` to ` your espnet localtion/espnet/bin/` 
-  move `espnet/nets/pytorch_backend/*` to ` your espnet localtion/espnet/nets/pytorch_backend/` 
+  move `espnet/nets/pytorch_backend/e2e_asr_transformer_multitask_accent.py` to ` your espnet localtion/espnet/nets/pytorch_backend/` 
+  move `espnet/nets/pytorch_backend/transformers/encoder_inter_no_norm.py` to `your espnet localtion/espnet/nets/pytorch_backend/transformer/`
   move `espnet/utils/*` to ` your espnet localtion/espnet/utils/` 
 ```
   2. step by step
     The overall code is divided into four parts, including feature extraction, JSON file generation, model training and decoding. You can control the steps by changing the value of the step variable.<br>
   3. Download pretrained model<br>
     First you need to download the pretrained model to the pretrained-model folder, the download link is as follows:<br>
-    - wavlm <br>
-        https://drive.google.com/file/d/12-cB34qCTvByWT-QtOcZaqwwO21FLSqU/view?usp=share_link <br>
-    - xlsr53
+    - wavlm 
+        https://drive.google.com/file/d/12-cB34qCTvByWT-QtOcZaqwwO21FLSqU/view?usp=share_link
+    - xlsr53 
         https://dl.fbaipublicfiles.com/fairseq/wav2vec/xlsr_53_56k.pt
 ```
 egs: 
