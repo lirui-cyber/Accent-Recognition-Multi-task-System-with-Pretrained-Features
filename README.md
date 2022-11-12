@@ -92,7 +92,7 @@ eg:
   3. Download pretrained model<br>
     First you need to download the pretrained model to the pretrained-model folder, the download link is as follows:<br>
     - wavlm <br>
-        https://drive.google.com/file/d/12-cB34qCTvByWT-QtOcZaqwwO21FLSqU/view?usp=share_link <r>
+        https://drive.google.com/file/d/12-cB34qCTvByWT-QtOcZaqwwO21FLSqU/view?usp=share_link <br>
     - xlsr53
         https://dl.fbaipublicfiles.com/fairseq/wav2vec/xlsr_53_56k.pt
 ```
