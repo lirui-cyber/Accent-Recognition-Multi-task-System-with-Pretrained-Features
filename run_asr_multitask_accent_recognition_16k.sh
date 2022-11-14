@@ -227,6 +227,7 @@ if [ ! -z $step06 ]; then
             --snapshots ${expdir}/results/snapshot.ep.* \
             --out ${expdir}/results/${recog_model} \
             --num ${n_average} \
+            --max-epoch ${max_epoch} \
             --out ${expdir}/results/${recog_model}
 
     if [[ "${recog_mode}" == "asr" ]];then
