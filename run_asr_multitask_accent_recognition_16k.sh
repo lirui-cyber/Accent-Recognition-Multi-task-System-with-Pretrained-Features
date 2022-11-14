@@ -264,13 +264,14 @@ fi
 if [ ! -z $step07 ]; then
   train_multitask_config=conf/e2e_asr_transformer_multitask_accent.yaml
   expdir=pretrained_model/16k_model/
+  max_epoch=30
   for test in $recog_set;do
     nj=30
     recog_model=model.val5.avg.best
     if [[ "${recog_mode}" == "asr" ]];then
-         decode_dir=asr_decode_${test}_max_epoch_$n
+         decode_dir=asr_decode_${test}_max_epoch_${max_epoch}
     else
-         decode_dir=accent_decode_${test}_max_epoch_$n
+         decode_dir=accent_decode_${test}_max_epoch_${max_epoch}
     fi
     echo "decoder mode: ${recog_mode}, decode_dir=${decode_dir}"
     # split data
