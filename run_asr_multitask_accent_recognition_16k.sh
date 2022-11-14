@@ -30,6 +30,13 @@ bpemode=bpe
 # feature configuration
 do_delta=false
 
+epoch_stage=0
+accentWeight=0.1
+asrWeight=1
+intermediate_ctc_weight=0
+intermediate_ctc_layer="12"
+transformer_lr=5
+
 train_multitask_config=conf/e2e_asr_transformer_multitask_accent.yaml
 decode_config=conf/espnet_decode.yaml
 preprocess_config=conf/espnet_specaug.yaml
@@ -87,17 +94,27 @@ dump_features=data-${model_type}
 
 train_set="train"
 valid_set="cv_all"
-recog_set="cv_all test"
+#recog_set="cv_all test"
+recog_set="cv_all test test_20_snrs test_15_snrs test_10_snrs test_5_snrs"
 
 
 if [ ! -z $step01 ]; then
    echo "extracting pretrain features and cmvn for 16k data"
-   for i in $train_set $recog_set;do
+   if [ ! -d $dump_features ];then
+          mkdir $dump_features
+   fi
+ 
+   cp -r $data/$train_set $dump_features/$train_set 
+   cp -r $data/$valid_set $dump_features/$valid_set
+   for i in $recog_set;do
       utils/fix_data_dir.sh $data/$i
-      cp -r $data $dump_features
-      ${cuda_cmd} --gpu 1 extract_feature.log python extract_feature.py $dump_features $feat_layer
-      ./utils/fix_data_dir.sh $dump_features/$i
+      if [ ! -d $dump_features/$i ];then
+          mkdir $dump_features/$i
+      fi
+      cp -r $data/$i/{spk2utt,text,utt2spk,wav.scp} $dump_features/$i
    done
+   ${cuda_cmd} --gpu 1 extract_feature.log python extract_feature.py $dump_features $feat_layer
+   ./utils/fix_data_dir.sh $dump_features/$i
 
    compute-cmvn-stats scp:$dump_features/${train_set}/feats.scp $dump_features/${train_set}/cmvn.ark
    echo "step01 Extracting pretrain features and cmvn Done"
@@ -143,14 +160,14 @@ if [ ! -z $step04 ]; then
     echo "stage 04: Make Json Labels Done"
 fi
 
-expname=${train_set}_transformer_12_enc_6_dec_asrWeight_${asrWeight}_accentWeight_${accentWeight}__withSpecAug_lr_${transformer_lr}_batch_size_${batch_size}_${backend} 
+expname=${train_set}_transformer_12_enc_6_dec_asrWeight_${asrWeight}_accentWeight_${accentWeight}_withSpecAug_lr_${transformer_lr}_batch_size_${batch_size}_${backend} 
 expdir=$exp/${expname}
 
 epochs=120
 if [ ! -z $step05 ]; then
     epoch_stage=0
     mkdir -p ${expdir}
-    echo "stage 06: Network Training without asr pretraining "
+    echo "stage 05: Network Training without asr pretraining "
     ngpu=1
     if  [ ${epoch_stage} -gt 0 ]; then
         echo "stage 05: Resume network from epoch ${epoch_stage}"
@@ -189,6 +206,7 @@ fi
 
 if [ ! -z $step06 ]; then
     train_multitask_config=conf/e2e_asr_transformer_multitask_accent.yaml
+    max_epoch=30
     for test in $recog_set;do
     nj=30
     if [[ $(get_yaml.py ${train_multitask_config} model-module) = *transformer* ]]; then
