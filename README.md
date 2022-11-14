@@ -22,7 +22,7 @@ bash installers/install_s3prl.sh
 ### Set your own execution environment
 Open path.sh file, change $MAIN_ROOT$ to your espnet directory, 
 ```
-e.g. MAIN_ROOT=/home/jicheng/espnet
+e.g. MAIN_ROOT=/home/lirui/espnet
 ```
 ## Data preparation
   1. All the data used in the experiment are stored in the `data` directory, in which train is used for training, valid is the verification set, 
