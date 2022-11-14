@@ -226,7 +226,8 @@ if [ ! -z $step06 ]; then
             --backend ${backend} \
             --snapshots ${expdir}/results/snapshot.ep.* \                                                                                                                           │·················································································
             --out ${expdir}/results/${recog_model} \                                                                                                                                │·················································································
-            --num ${n_average} 
+            --num ${n_average} \
+            --out ${expdir}/results/${recog_model}
 
     if [[ "${recog_mode}" == "asr" ]];then
          decode_dir=asr_decode_${test}_max_epoch_$n
