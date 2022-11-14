@@ -69,7 +69,7 @@ eg:
     The overall code is divided into four parts, including feature extraction, JSON file generation, model training and decoding. You can control the steps by changing the value of the step variable.<br>
   3. Download pretrained model<br>
     First you need to download the pretrained model to the pretrained-model folder, the download link is as follows:<br>
-    - wavlm 
+    - wavlm_large
         https://drive.google.com/file/d/12-cB34qCTvByWT-QtOcZaqwwO21FLSqU/view?usp=share_link<br>
     - xlsr53 
         https://dl.fbaipublicfiles.com/fairseq/wav2vec/xlsr_53_56k.pt
