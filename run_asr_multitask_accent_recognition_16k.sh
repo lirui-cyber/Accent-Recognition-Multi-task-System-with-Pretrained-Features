@@ -224,8 +224,8 @@ if [ ! -z $step06 ]; then
         average_checkpoints.py \
             ${opt} \
             --backend ${backend} \
-            --snapshots ${expdir}/results/snapshot.ep.* \                                                                                                                           │·················································································
-            --out ${expdir}/results/${recog_model} \                                                                                                                                │·················································································
+            --snapshots ${expdir}/results/snapshot.ep.* \
+            --out ${expdir}/results/${recog_model} \
             --num ${n_average} \
             --out ${expdir}/results/${recog_model}
 
