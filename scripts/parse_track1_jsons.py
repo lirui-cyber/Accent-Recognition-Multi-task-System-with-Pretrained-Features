@@ -20,7 +20,10 @@ def parse_result(result_label):
             # print(line)
             uttid, hyp = line.split()[:]
             hyp = int(hyp) 
-            ref = ACCENT_LIST.index(uttid.split('-')[1])
+            if uttid.split('-')[0] == "noise":
+                ref = ACCENT_LIST.index(uttid.split('-')[2])
+            else:
+                ref = ACCENT_LIST.index(uttid.split('-')[1])
             utt_nums[ref] += 1
             
             if ref == hyp:
