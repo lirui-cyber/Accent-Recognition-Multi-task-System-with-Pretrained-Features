@@ -83,12 +83,22 @@ egs:
   bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 4
   bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 5
   bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 6
+  ### for 8k data
+  bash run_asr_multitask_accent_recognition_8k.sh --nj 20 --steps 1 --model_type wavlm
+  bash run_asr_multitask_accent_recognition_8k.sh --nj 20 --steps 2
+  bash run_asr_multitask_accent_recognition_8k.sh --nj 20 --steps 3
+  bash run_asr_multitask_accent_recognition_8k.sh --nj 20 --steps 4
+  bash run_asr_multitask_accent_recognition_8k.sh --nj 20 --steps 5
+  bash run_asr_multitask_accent_recognition_8k.sh --nj 20 --steps 6
   ```
-  4. For pretrained model, you can download from this link: https://drive.google.com/file/d/1xqsRHQi7IrlYYekDK6tysbkEQNYtGirE/view?usp=share_link  <br>
+  4. For pretrained model trained on 8k data, you can download from this link: https://drive.google.com/file/d/1xqsRHQi7IrlYYekDK6tysbkEQNYtGirE/view?usp=share_link  <br>
      You can run the following command to directly reproduce our results.
 ```
   # 16k data
   bash run_asr_multitask_accent_recognition_16k.sh --nj 20 --steps 7 
+  # 8k data
+  bash run_asr_multitask_accent_recognition_8k.sh --nj 20 --steps 7 
+
 ```
 
 

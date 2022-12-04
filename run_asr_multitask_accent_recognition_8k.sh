@@ -260,7 +260,7 @@ if [ ! -z $step06 ]; then
 fi
 #fi
 
-#### Test for 16k data
+#### Test for 8k data
 if [ ! -z $step07 ]; then
   train_multitask_config=conf/e2e_asr_transformer_multitask_accent.yaml
   max_epoch=30
