@@ -114,8 +114,6 @@ if [ ! -z $step01 ]; then
       cp -r $data/$i/{spk2utt,text,utt2spk,wav.scp} $dump_features/$i
    done
    ${cuda_cmd} --gpu 1 extract_feature.log python extract_feature.py $dump_features $feat_layer
-   
-
    compute-cmvn-stats scp:$dump_features/${train_set}/feats.scp $dump_features/${train_set}/cmvn.ark
    echo "step01 Extracting pretrain features and cmvn Done"
 fi
