@@ -55,7 +55,6 @@ bash generate_wav.sh
 
 ## Accent recognition system
   1. Model file preparation
-    `run_asr_multitask_accent_recognition_16k.sh` and `run_asr_multitask_accent_recognition_8k.sh` are both used to train the multi-task model.<br>
     Before running, you need to first move the corresponding files of espnet to the corresponding directory of your espnet directory. 
 ```
 eg: 
