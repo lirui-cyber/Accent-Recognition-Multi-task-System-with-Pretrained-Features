@@ -25,8 +25,8 @@ Open path.sh file, change $MAIN_ROOT$ to your espnet directory,
 e.g. MAIN_ROOT=/home/lirui/espnet
 ```
 ## Data preparation
-  1. All the data used in the experiment are stored in the `data` directory, in which train is used for training, valid is the verification set, 
-    cv_all and test are used for testing respectively.
+  1. All the data used in the experiment are stored in the `data` directory, in which train is used for training, cv_all is the verification set, 
+    test is used for testing respectively.
   2. In order to better reproduce my experimental results, you can download the data set first, and then directly change the path in `wav.scp` in different sets in `data` directory. <br>
   You can also use the `sed` command to replace the path in the wav.scp file with your path.
 ```
